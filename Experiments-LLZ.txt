@@ -1,0 +1,5 @@
+For this part, we have two things to evaluate. First part is the scores of the vocabularies. The second part is the classify the movie reviews.
+
+As we design our own algorithm to get the score of the vocabularies, we need to know if the scores are useful or available for our reviews classification. So we compare our scores with the scores they provide. First, we check if the vocabularies are positive or negetive. Second, we check if our scores are meaningful or useful for the reviews.
+
+For the second part, which is easy. Because they have already classified the movie reviews. We just compare our results with that they gave us. Then we can know the accuracy of our classification.
