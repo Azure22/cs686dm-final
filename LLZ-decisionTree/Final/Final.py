@@ -112,21 +112,61 @@ class TreeNode:
             ent -= prob*math.log(prob,2) #get the log value  
         return ent 
 
+def getAccur(trainData, testData):
+    feature = trainData[0]
+    feature[-1] = None
+    f = feature[:]
+    data = trainData[1:]
+    deciTree = TreeNode()
+    deciTree.fit(data, feature)
+    #print deciTree.classify(['pretentious', 'improper', 'complete', '2', 'critical', 'convenient','nonprob','priority'], f)
+    correctRes = [example[-1] for example in testData]
+    correctRes = correctRes[1:]
+    teData = testData[1:]
+    result = []
+    for line in teData:
+        result.append(deciTree.classify(line[:-1], f))
+    #print deciTree.bestInfoGainAttr(data, feature)
+    right  = 0
+    for i in range(0, len(correctRes)):
+        if result[i] == correctRes[i]:
+            right += 1
+    accur = float(right) / len(correctRes)
+    print "accuracy:"
+    print accur
+
 if __name__ == '__main__':
     ## Read input
     #options = readCommand(sys.argv[1:])
     ## Run clustering
     #runClustering(options)
 
-    reader = csv.reader(file('tennis.csv', 'rb'))
-    table = []
-    for line in reader:
-        table.append(line)
-    feature = table[0]
-    feature[-1] = None
-    f = feature[:]
-    data = table[1:]
-    deciTree = TreeNode()
-    deciTree.fit(data, feature)
-    print deciTree.classify(['sunny', 'hot', 'high', 'TRUE'], f)
-    #print deciTree.bestInfoGainAttr(data, feature)
+    reader1 = csv.reader(file('test_data_b.csv', 'rb'))
+    trainData = []
+    for line in reader1:
+        trainData.append(line)
+    reader2 = csv.reader(file('train_data_b.csv', 'rb'))
+    testData = []
+    for line in reader2:
+        testData.append(line)
+
+    getAccur(trainData, testData)
+    #feature = trainData[0]
+    #feature[-1] = None
+    #f = feature[:]
+    #data = trainData[1:]
+    #deciTree = TreeNode()
+    #deciTree.fit(data, feature)
+    ##print deciTree.classify(['pretentious', 'improper', 'complete', '2', 'critical', 'convenient','nonprob','priority'], f)
+    #correctRes = [example[-1] for example in trainData]
+    #correctRes = correctRes[1:]
+    #result = []
+    #for line in data:
+    #    result.append(deciTree.classify(line[:-1], f))
+    ##print deciTree.bestInfoGainAttr(data, feature)
+    #right  = 0
+    #for i in range(0, len(correctRes)):
+    #    if result[i] == correctRes[i]:
+    #        right += 1
+    #accur = float(right) / len(correctRes)
+    #print accur
