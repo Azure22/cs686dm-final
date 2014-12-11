@@ -132,25 +132,30 @@ def getAccur(trainData, testData):
         if result[i] == correctRes[i]:
             right += 1
     accur = float(right) / len(correctRes)
-    print "accuracy:"
-    print accur
+    
+    return accur
+
+def pro_start(trainFile, testFile):
+    reader1 = csv.reader(file(trainFile, 'rb'))
+    trainData = []
+    for line in reader1:
+        trainData.append(line)
+    reader2 = csv.reader(file(testFile, 'rb'))
+    testData = []
+    for line in reader2:
+        testData.append(line)
+    return getAccur(trainData, testData)
 
 if __name__ == '__main__':
+    accur = pro_start('train_data_b.csv', 'test_data_b.csv')
+    print "accuracy:"
+    print accur
     ## Read input
     #options = readCommand(sys.argv[1:])
     ## Run clustering
     #runClustering(options)
 
-    reader1 = csv.reader(file('test_data_b.csv', 'rb'))
-    trainData = []
-    for line in reader1:
-        trainData.append(line)
-    reader2 = csv.reader(file('train_data_b.csv', 'rb'))
-    testData = []
-    for line in reader2:
-        testData.append(line)
-
-    getAccur(trainData, testData)
+    
     #feature = trainData[0]
     #feature[-1] = None
     #f = feature[:]
