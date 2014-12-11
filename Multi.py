@@ -27,7 +27,7 @@ class Multi():
 class NaiveBayesClassifier():
 
     def __init__(self, num_features):
-        self.legalLabels = ["positive", "negative"]
+        self.legalLabels = [0, 1]
         self.labels = {}
         self.dict = {}
         self.temp_1 = {}
@@ -35,7 +35,7 @@ class NaiveBayesClassifier():
         self.k = 0.1
         self.features = []
 
-        for i in range(len(num_features)):
+        for i in range(num_features):
             self.features.append(i)
 
     def train(self, trainingData, trainingLabels):
@@ -111,12 +111,12 @@ if __name__ == '__main__':
     test_data = []
     test_labels = []
 
-    f_train = open("train_data.csv", "r")
+    f_train = open("train_data_b.csv", "r")
     for line in csv.reader(f_train.readline().splitlines()):
         train_data.append(line[0:-1])
         train_labels.append(line[-1])
 
-    f_test = open("test_data.csv", "r")
+    f_test = open("test_data_b.csv", "r")
     for line in csv.reader(f_test.readline().splitlines()):
         test_data.append(line[0:-1])
         test_labels.append(line[-1])
