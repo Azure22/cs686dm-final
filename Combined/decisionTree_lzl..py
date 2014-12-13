@@ -158,7 +158,7 @@ if __name__ == '__main__':
     #data = trainData[1:]
     #deciTree = TreeNode()
     #deciTree.fit(data, feature)
-    #correctRes = [example[-1] for example in trainData]
+    #correctRes = [array[-1] for array in trainData]
     #correctRes = correctRes[1:]
     #result = []
     #for line in data:
