@@ -9,9 +9,6 @@ class TreeNode:
         self.v = None
 
     def fit(self, data, attr = None):
-        if (attr == None):
-            attr = 0# data.all_attr;
-       
         if (attr == []):
             self.child = None
             self.value = zeroR(label)
@@ -20,11 +17,11 @@ class TreeNode:
         self.attribute = self.bestInfoGainAttr(data, attr)
         #print self.attribute
         if self.attribute == None:
-            alist = [example[-1] for example in data]
+            alist = [array[-1] for array in data]
             self.v = self.zeroR(alist)
         else:
             index = attr.index(self.attribute)
-            values = [example[index] for example in data]
+            values = [array[index] for array in data]
             value = set(values)
             attr[index] = None
             #print value
@@ -74,7 +71,7 @@ class TreeNode:
             index = attr.index(a)
             gain = 0 # get gain of data for a
             if a != None:
-                attrList = [example[index] for example in data]
+                attrList = [array[index] for array in data]
                 newEntropy = 0.0
                 values = set(attrList)
                 for value in values:
@@ -101,15 +98,15 @@ class TreeNode:
     def entropy(self, data):
         numEntries = len(data)  
         labelCounts = {}  
-        for featVec in data:      #create the dictionary for all of the data  
-            currentLabel = featVec[-1]
+        for attrVec in data:
+            currentLabel = attrVec[-1]
             if currentLabel not in labelCounts.keys():  
                 labelCounts[currentLabel] = 0  
             labelCounts[currentLabel] += 1  
         ent = 0.0  
         for key in labelCounts:  
             prob = float(labelCounts[key])/numEntries  
-            ent -= prob*math.log(prob,2) #get the log value  
+            ent -= prob * math.log(prob, 2) 
         return ent 
 
 def getAccur(trainData, testData):
@@ -119,8 +116,7 @@ def getAccur(trainData, testData):
     data = trainData[1:]
     deciTree = TreeNode()
     deciTree.fit(data, feature)
-    #print deciTree.classify(['pretentious', 'improper', 'complete', '2', 'critical', 'convenient','nonprob','priority'], f)
-    correctRes = [example[-1] for example in testData]
+    correctRes = [array[-1] for array in testData]
     correctRes = correctRes[1:]
     teData = testData[1:]
     result = []
@@ -162,7 +158,6 @@ if __name__ == '__main__':
     #data = trainData[1:]
     #deciTree = TreeNode()
     #deciTree.fit(data, feature)
-    ##print deciTree.classify(['pretentious', 'improper', 'complete', '2', 'critical', 'convenient','nonprob','priority'], f)
     #correctRes = [example[-1] for example in trainData]
     #correctRes = correctRes[1:]
     #result = []
